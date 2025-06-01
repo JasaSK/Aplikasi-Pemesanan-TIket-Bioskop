@@ -213,8 +213,22 @@ public class GUI_TiketBioskop extends javax.swing.JFrame {
         }
         refresh();
     }
+    String judul1, jumlah1, harga1, bayar1, metode1;
+    private int id;
 
-    
+    public void itempilih() {
+
+        txtJudul.setText(judul1);
+        txtJumlah.setText(jumlah1);
+        txtHarga.setText(harga1);
+        txtJumlahPembayaran.setText(bayar1);
+        if (metode1.equalsIgnoreCase("Kartu Kredit")) {
+            cbMetodePembayaran.setSelectedItem("Kartu Kredit");
+        } else {
+            cbMetodePembayaran.setSelectedItem("Tunai");
+        }
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -333,6 +347,11 @@ public class GUI_TiketBioskop extends javax.swing.JFrame {
                 "Judul Film", "Jumlah Tiket", "Harga", "Total", "Diskon", "Metode", "Dibayar", "Keterangan"
             }
         ));
+        tabelTransaksi.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelTransaksiMouseClicked(evt);
+            }
+        });
         jScrollPane4.setViewportView(tabelTransaksi);
 
         btnDelete.setText("Delete");
@@ -485,6 +504,22 @@ public class GUI_TiketBioskop extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btnCloseActionPerformed
+
+    private void tabelTransaksiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelTransaksiMouseClicked
+
+        int selectedRow = tabelTransaksi.getSelectedRow();
+        if (selectedRow != -1) {
+            id = Integer.parseInt(tabelTransaksi.getValueAt(selectedRow, 0).toString());  // kolom id di indeks 0
+            judul1 = tabelTransaksi.getValueAt(selectedRow, 1).toString();
+            jumlah1 = tabelTransaksi.getValueAt(selectedRow, 2).toString();
+            harga1 = tabelTransaksi.getValueAt(selectedRow, 3).toString();
+            bayar1 = tabelTransaksi.getValueAt(selectedRow, 7).toString();
+            metode1 = tabelTransaksi.getValueAt(selectedRow, 6).toString();
+
+            itempilih();  // isi form
+        }
+// TODO add your handling code here:
+    }//GEN-LAST:event_tabelTransaksiMouseClicked
 
     /**
      * @param args the command line arguments
